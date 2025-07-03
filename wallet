@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Connect Phantom Wallet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    .btn {
+      background: #8b5cf6;
+      border: none;
+      padding: 15px 25px;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #7c3aed;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🚀 Connect Your Phantom Wallet</h1>
+  <p>Click below to link your wallet.</p>
+
+  <button class="btn" onclick="connectWallet()">Connect Phantom</button>
+  <p id="wallet-address" style="margin-top: 20px;"></p>
+
+  <script>
+    async function connectWallet() {
+      if (window.solana && window.solana.isPhantom) {
+        try {
+          const response = await window.solana.connect();
+          const address = response.publicKey.toString();
+          document.getElementById('wallet-address').innerText = 'Connected: ' + address;
+        } catch (err) {
+          alert("User rejected connection.");
+        }
+      } else {
+        alert("Phantom Wallet not found. Please install it from https://phantom.app/");
+      }
+    }
+  </script>
+
+</body>
+</html>
