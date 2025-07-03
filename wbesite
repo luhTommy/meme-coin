@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Don't Miss the Meme Drop!</title>
+  <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
+  <script>
+    async function connectWallet() {
+      if ('solana' in window) {
+        const provider = window.solana;
+        if (provider.isPhantom) {
+          try {
+            const resp = await provider.connect();
+            document.getElementById("wallet-address").innerText = "Connected: " + resp.publicKey.toString();
+          } catch (err) {
+            alert("Connection failed: " + err.message);
+          }
+        }
+      } else {
+        alert("Phantom Wallet not found. Please install it.");
+      }
+    }
+  </script>
+  <style>
+    body { font-family: sans-serif; background: #000; color: #fff; text-align: center; padding: 50px; }
+    .btn { background: #ff69b4; padding: 15px 30px; border: none; color: white; font-size: 18px; border-radius: 8px; cursor: pointer; }
+    .btn:hover { background: #ff85c1; }
+  </style>
+</head>
+<body>
+  <h1>🚀 $MEMEDROP IS COMING</h1>
+  <p>Don't miss the biggest meme coin of the year. Powered by Solana.</p>
+  <button class="btn" onclick="connectWallet()">Connect Phantom Wallet</button>
+  <p id="wallet-address" style="margin-top: 20px;"></p>
+</body>
+</html>
